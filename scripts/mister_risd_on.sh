@@ -27,13 +27,13 @@ MISTER_RISD_URL="https://github.com/sofakng/risd"
 if [ ! -f "${LINUX_PATH}/risd" ]
 then
 	echo "Downloading risd binary and risd_init_script"
-	curl -L "$MISTER_RISD_URL/blob/main/binaries/arm_risd" -o "${LINUX_PATH}/risd"
+	curl -L "$MISTER_RISD_URL/blob/main/binaries/arm-risd?raw=true" -o "${LINUX_PATH}/risd"
 	case $? in
 		0)
 			curl -L "$MISTER_RISD_URL/blob/main/scripts/mister_risd_init_script" -o "${LINUX_PATH}/risd_init_script"
 			;;
 		60)
-			if ! curl -kL "$MISTER_RISD_URL/blob/main/binaries/arm_risd?raw=true" -o "${LINUX_PATH}/risd"
+			if ! curl -kL "$MISTER_RISD_URL/blob/main/binaries/arm-risd?raw=true" -o "${LINUX_PATH}/risd"
 			then
 				echo "No Internet connection"
 				exit 2
