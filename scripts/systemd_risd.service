@@ -2,7 +2,7 @@
 Description=Remote Input Service Daemon
 
 [Service]
-ExecStart=/usr/bin/risd
+ExecStart=/usr/local/bin/risd
 
 [Install]
 WantedBy=multi-user.target
