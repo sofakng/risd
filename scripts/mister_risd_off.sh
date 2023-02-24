@@ -18,18 +18,17 @@
 # You can download the latest version of this script from:
 # https://github.com/MiSTer-devel/Scripts_MiSTer
 
-# Version 1.0 - 2021-01-21 - First commit
-# Version 1.2 - 2021-02-26 - Removed uname validation
+# Version 1.0 - 2023-02-24 - First commit
 
-/etc/init.d/S40xow stop /dev/null > /dev/null 2>&1
+/etc/init.d/S40risd stop /dev/null > /dev/null 2>&1
 mount | grep -q "on / .*[(,]ro[,$]" && RO_ROOT="true"
 [ "$RO_ROOT" == "true" ] && mount / -o remount,rw
-rm /etc/init.d/S40xow > /dev/null 2>&1
+rm /etc/init.d/S40risd > /dev/null 2>&1
 sync
 [ "$RO_ROOT" == "true" ] && mount / -o remount,ro
 sync
 
-echo "xow service is off and"
+echo "risd service is off and"
 echo "inactive at startup."
 echo "Done!"
 exit 0

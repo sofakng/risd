@@ -24,21 +24,21 @@ LINUX_PATH="/media/fat/linux"
 RISD_INIT_SCRIPT="$LINUX_PATH/risd_init_script"
 MISTER_RISD_URL="https://github.com/sofakng/risd"
 
-if [ ! -f "${LINUX_PATH}/xow" ]
+if [ ! -f "${LINUX_PATH}/risd" ]
 then
 	echo "Downloading risd binary and risd_init_script"
-	curl -L "$MISTER_XOW_URL/blob/main/binaries/arm_risd" -o "${LINUX_PATH}/risd"
+	curl -L "$MISTER_RISD_URL/blob/main/binaries/arm_risd" -o "${LINUX_PATH}/risd"
 	case $? in
 		0)
-			curl -L "$MISTER_XOW_URL/blob/main/xow_init_script" -o "${LINUX_PATH}/xow_init_script"
+			curl -L "$MISTER_RISD_URL/blob/main/scripts/mister_risd_init_script" -o "${LINUX_PATH}/risd_init_script"
 			;;
 		60)
-			if ! curl -kL "$MISTER_XOW_URL/blob/main/xow?raw=true" -o "${LINUX_PATH}/xow"
+			if ! curl -kL "$MISTER_RISD_URL/blob/main/binaries/arm_risd?raw=true" -o "${LINUX_PATH}/risd"
 			then
 				echo "No Internet connection"
 				exit 2
 			fi
-			curl -kL "$MISTER_XOW_URL/blob/main/xow_init_script?raw=true" -o "${LINUX_PATH}/xow_init_script"
+			curl -kL "$MISTER_RISD_URL/blob/main/scripts/mister_risd_init_script?raw=true" -o "${LINUX_PATH}/risd_init_script"
 			;;
 		*)
 			echo "No Internet connection"
@@ -49,15 +49,15 @@ fi
 
 mount | grep "on / .*[(,]ro[,$]" -q && RO_ROOT="true"
 [ "$RO_ROOT" == "true" ] && mount / -o remount,rw
-rm /etc/init.d/S40xow > /dev/null 2>&1
-ln -s $XOW_INIT_SCRIPT /etc/init.d/S40xow > /dev/null 2>&1
+rm /etc/init.d/S40risd > /dev/null 2>&1
+ln -s $RISD_INIT_SCRIPT /etc/init.d/S40risd > /dev/null 2>&1
 sync
 [ "$RO_ROOT" == "true" ] && mount / -o remount,ro
 sync
 
-/etc/init.d/S40xow start
+/etc/init.d/S40risd start
 
-echo "xow service is on and"
+echo "risd service is on and"
 echo "active at startup."
 echo "Done!"
 exit 0
