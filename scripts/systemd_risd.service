@@ -1,0 +1,8 @@
+[Unit]
+Description=Remote Input Service Daemon
+
+[Service]
+ExecStart=/usr/bin/risd
+
+[Install]
+WantedBy=multi-user.target
