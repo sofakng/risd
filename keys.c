@@ -68,7 +68,7 @@ void fill_keylist()
     keys[i++] = create_key("KEY_RIGHT", KEY_RIGHT);
 
     keys[i++] = create_key("KEY_PAGEDOWN", KEY_PAGEDOWN);
-    keys[i++] = create_key("KEY_UP", KEY_PAGEUP);
+    keys[i++] = create_key("KEY_PAGEUP", KEY_PAGEUP);
 
     keys[i++] = create_key("KEY_ENTER", KEY_ENTER);
     keys[i++] = create_key("KEY_RETURN", KEY_ENTER);
@@ -92,6 +92,11 @@ void fill_keylist()
 
     keys[i++] = create_key("KEY_PLUS", KEY_KPPLUS);
     keys[i++] = create_key("KEY_MINUS", KEY_KPMINUS);
+
+    keys[i++] = create_key("KEY_CAPSLOCK", KEY_CAPSLOCK);
+    keys[i++] = create_key("KEY_NUMLOCK", KEY_NUMLOCK);
+    keys[i++] = create_key("KEY_SCROLLLOCK", KEY_SCROLLLOCK);
+    keys[i++] = create_key("KEY_SYSRQ", KEY_SYSRQ);
 
     if (i > KEYLIST_SIZE) {
         fprintf(stderr, "Key list size is too large.\r\n");
