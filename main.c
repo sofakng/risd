@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <arpa/inet.h>
 #include <netdb.h>
@@ -11,6 +12,23 @@
 #include "utility.h"
 
 // #define DEBUG
+
+void process_cmd_command(char* arg1, char* arg2)
+{
+    if (arg2 == NULL)
+    {
+        if ((strcmp(arg1, "SUSPEND") == 0) || (strcmp(arg1, "SLEEP") == 0))
+        {
+            fprintf(stdout, "Suspend command received.  Suspending system...\n");
+            system("/usr/bin/systemctl suspend");
+        }
+        else if ((strcmp(arg1, "REBOOT") == 0) || (strcmp(arg1, "RESTART") == 0))
+        {
+            fprintf(stdout, "Reboot command received.  Rebooting system...\n");
+            system("/usr/bin/systemctl reboot");
+        }
+    }
+}
 
 void process_kbd_command(char* arg1, char* arg2)
 {
@@ -83,9 +101,9 @@ void process_command(char* cmdString)
         arg2 = strtok(NULL, " ");
 
     if (strcmp(cmd, "KBD") == 0)
-    {
         process_kbd_command(arg1, arg2);
-    }
+    else if (strcmp(cmd, "CMD") == 0)
+        process_cmd_command(arg1, arg2);
 }
 
 void process_buffer(char* buffer)
